@@ -1,0 +1,40 @@
+# ==============================================================================
+# ConflictGuard — Dependency manifest
+# Tier 3 multi-agent application: Streamlit UI + orchestrated LLM agents + local
+# vector RAG over historical client/matter records.
+#
+# Install with:
+#   pip install -r requirements.txt
+# ==============================================================================
+
+# --- UI layer ----------------------------------------------------------------
+streamlit==1.39.0            # Web app front end for the analyst-facing dashboard
+
+# --- LLM access ----------------------------------------------------------------
+openai==1.54.4                # Official OpenAI SDK (also used for Portkey-compatible calls)
+portkey-ai==1.5.1              # Optional: Portkey AI gateway client (model routing, caching, observability)
+httpx==0.27.2                   # Pinned: newer httpx drops the 'proxies' kwarg that openai/portkey-ai still pass
+
+# --- Agent orchestration -------------------------------------------------------
+pydantic==2.9.2                # Typed data models for agent inputs/outputs (conflict reports, client records)
+tenacity==9.0.0                 # Retry/backoff logic for flaky LLM or network calls
+
+# --- RAG / vector search ---------------------------------------------------------
+scikit-learn==1.5.2                # TF-IDF vectorizer + cosine similarity: lightweight, offline, no model downloads
+numpy==2.1.3                         # Numeric backend for similarity scoring
+chromadb==0.5.18                 # (Optional/future) swap-in vector DB if moving beyond TF-IDF
+sentence-transformers==3.2.1      # (Optional/future) local embedding model; not required by the current retriever
+
+# --- Data handling ----------------------------------------------------------------
+pandas==2.2.3                      # Tabular manipulation of client/matter records for display & export
+
+# --- Configuration / environment ---------------------------------------------------
+python-dotenv==1.0.1                 # Loads .env file into environment variables
+
+# --- Testing -------------------------------------------------------------------------
+pytest==8.3.3                         # Unit tests for agents, retriever, and matching logic
+pytest-mock==3.14.0                    # Mocking LLM calls in tests
+
+# --- Dev / quality tooling (optional but recommended) ---------------------------------
+black==24.10.0                          # Code formatting
+ruff==0.7.4                              # Linting

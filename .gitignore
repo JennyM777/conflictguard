@@ -1,0 +1,22 @@
+# --- Secrets ---
+.env
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# --- Vector store / generated data ---
+data/vector_store/*
+!data/vector_store/.gitkeep
+
+# --- OS / editor cruft ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Testing ---
+.pytest_cache/
+.coverage

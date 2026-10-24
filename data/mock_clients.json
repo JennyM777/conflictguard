@@ -1,0 +1,250 @@
+{
+  "_meta": {
+    "description": "Synthetic/mock dataset of past law firm clients and matters, used for local RAG indexing and conflict-of-interest matching in ConflictGuard. All names, deals, and people are fictional.",
+    "schema_version": "1.0",
+    "record_count_note": "Intentionally includes overlapping entities (e.g. Northbridge Capital, Vantage Pharma) across multiple matters so the retriever/agents have realistic conflict scenarios to detect.",
+    "conflict_types_represented": [
+      "direct_adversity (firm would now sue a current/former client)",
+      "same_matter_opposite_side (new engagement adverse to a past deal counterparty)",
+      "positional_conflict (arguing a legal position contrary to one taken for another client)",
+      "business_conflict (competing bidders in the same deal/industry)",
+      "confidential_information_overlap (shared personnel/board members)"
+    ]
+  },
+  "clients": [
+    {
+      "client_id": "CL-1001",
+      "client_name": "Northbridge Capital Partners",
+      "aliases": ["Northbridge Capital", "Northbridge Partners LLC"],
+      "industry": "Private Equity",
+      "matters": [
+        {
+          "matter_id": "M-2021-014",
+          "matter_name": "Acquisition of Summit Logistics Inc.",
+          "matter_type": "M&A Advisory",
+          "role": "Represented Acquirer",
+          "adverse_parties": ["Summit Logistics Inc."],
+          "related_entities": ["Summit Logistics Inc. board of directors", "Meridian Bank (financing)"],
+          "status": "Closed",
+          "date_opened": "2021-02-10",
+          "date_closed": "2021-08-30",
+          "lead_attorney": "Elena Vasquez",
+          "confidentiality_level": "High",
+          "sensitive_notes": "Firm had access to Summit Logistics' non-public financials, customer contracts, and litigation history during due diligence."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1002",
+      "client_name": "Summit Logistics Inc.",
+      "aliases": ["Summit Logistics", "Summit Logistics Holdings"],
+      "industry": "Transportation & Logistics",
+      "matters": [
+        {
+          "matter_id": "M-2019-006",
+          "matter_name": "General Corporate Counsel Retainer",
+          "matter_type": "General Corporate",
+          "role": "Represented Company (ongoing retainer)",
+          "adverse_parties": [],
+          "related_entities": ["Summit Logistics board of directors"],
+          "status": "Closed",
+          "date_opened": "2019-01-15",
+          "date_closed": "2021-08-30",
+          "lead_attorney": "David Okafor",
+          "confidentiality_level": "High",
+          "sensitive_notes": "Firm served as outside general counsel prior to the Northbridge acquisition; retained deep institutional knowledge of Summit's contracts and IP portfolio."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1003",
+      "client_name": "Vantage Pharma Holdings",
+      "aliases": ["Vantage Pharma", "Vantage Pharmaceuticals"],
+      "industry": "Pharmaceuticals",
+      "matters": [
+        {
+          "matter_id": "M-2022-031",
+          "matter_name": "Merger with Clearwater Biosciences",
+          "matter_type": "M&A Advisory",
+          "role": "Represented Target (Vantage Pharma)",
+          "adverse_parties": ["Clearwater Biosciences"],
+          "related_entities": ["Clearwater Biosciences board of directors", "FDA regulatory filings"],
+          "status": "Closed",
+          "date_opened": "2022-03-01",
+          "date_closed": "2022-11-20",
+          "lead_attorney": "Priya Nair",
+          "confidentiality_level": "High",
+          "sensitive_notes": "Firm reviewed Vantage's unpublished Phase III trial data and patent portfolio valuation during the merger."
+        },
+        {
+          "matter_id": "M-2023-002",
+          "matter_name": "Product Liability Defense - Dermaclear Line",
+          "matter_type": "Litigation",
+          "role": "Represented Defendant (Vantage Pharma)",
+          "adverse_parties": ["Class plaintiffs (consumer product liability)"],
+          "related_entities": [],
+          "status": "Active",
+          "date_opened": "2023-05-12",
+          "date_closed": null,
+          "lead_attorney": "Marcus Lee",
+          "confidentiality_level": "Privileged",
+          "sensitive_notes": "Active litigation; firm holds privileged internal safety-testing memos from Vantage Pharma."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1004",
+      "client_name": "Clearwater Biosciences",
+      "aliases": ["Clearwater Bio"],
+      "industry": "Pharmaceuticals",
+      "matters": [
+        {
+          "matter_id": "M-2022-031-ADV",
+          "matter_name": "Merger with Vantage Pharma (opposing counsel engagement)",
+          "matter_type": "M&A Advisory",
+          "role": "Adverse Party (opposing counsel represented Vantage, not this firm)",
+          "adverse_parties": ["Vantage Pharma Holdings"],
+          "related_entities": [],
+          "status": "Closed",
+          "date_opened": "2022-03-01",
+          "date_closed": "2022-11-20",
+          "lead_attorney": null,
+          "confidentiality_level": "Standard",
+          "sensitive_notes": "Clearwater was represented by outside counsel; this firm never represented Clearwater directly but gained visibility into deal terms via the Vantage engagement."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1005",
+      "client_name": "Oakley & Finch Retail Group",
+      "aliases": ["Oakley Finch", "O&F Retail"],
+      "industry": "Consumer Retail",
+      "matters": [
+        {
+          "matter_id": "M-2020-019",
+          "matter_name": "Chapter 11 Restructuring Advisory",
+          "matter_type": "Restructuring/Bankruptcy",
+          "role": "Represented Debtor",
+          "adverse_parties": ["Secured creditor consortium (led by Meridian Bank)"],
+          "related_entities": ["Meridian Bank"],
+          "status": "Closed",
+          "date_opened": "2020-04-05",
+          "date_closed": "2021-01-22",
+          "lead_attorney": "Elena Vasquez",
+          "confidentiality_level": "High",
+          "sensitive_notes": "Firm negotiated directly against Meridian Bank's creditor consortium; detailed knowledge of Meridian's recovery strategy and loan covenant positions."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1006",
+      "client_name": "Meridian Bank",
+      "aliases": ["Meridian National Bank"],
+      "industry": "Financial Services",
+      "matters": [
+        {
+          "matter_id": "M-2021-014-FIN",
+          "matter_name": "Acquisition Financing for Northbridge/Summit Deal",
+          "matter_type": "Finance/Lending",
+          "role": "Represented Lender (Meridian Bank)",
+          "adverse_parties": [],
+          "related_entities": ["Northbridge Capital Partners", "Summit Logistics Inc."],
+          "status": "Closed",
+          "date_opened": "2021-03-01",
+          "date_closed": "2021-08-30",
+          "lead_attorney": "David Okafor",
+          "confidentiality_level": "High",
+          "sensitive_notes": "Firm represented the lender on the same transaction where it also represented the acquirer (Northbridge) on separate matters - requires joint-representation conflict review."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1007",
+      "client_name": "Hartwell Energy Partners",
+      "aliases": ["Hartwell Energy"],
+      "industry": "Energy",
+      "matters": [
+        {
+          "matter_id": "M-2018-003",
+          "matter_name": "Joint Venture Formation - Permian Basin Assets",
+          "matter_type": "General Corporate",
+          "role": "Represented Hartwell Energy",
+          "adverse_parties": [],
+          "related_entities": ["Red Canyon Resources (JV partner)"],
+          "status": "Closed",
+          "date_opened": "2018-06-11",
+          "date_closed": "2018-12-01",
+          "lead_attorney": "Priya Nair",
+          "confidentiality_level": "Standard",
+          "sensitive_notes": "No ongoing sensitivity; JV dissolved amicably in 2020."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1008",
+      "client_name": "BrightPath EdTech Inc.",
+      "aliases": ["BrightPath", "BrightPath Education Technologies"],
+      "industry": "Education Technology",
+      "matters": [
+        {
+          "matter_id": "M-2023-017",
+          "matter_name": "Series C Financing Round",
+          "matter_type": "Corporate Finance",
+          "role": "Represented Company (BrightPath)",
+          "adverse_parties": [],
+          "related_entities": ["Westlake Ventures (lead investor)"],
+          "status": "Closed",
+          "date_opened": "2023-01-20",
+          "date_closed": "2023-04-15",
+          "lead_attorney": "Marcus Lee",
+          "confidentiality_level": "Standard",
+          "sensitive_notes": "Firm reviewed BrightPath's cap table and investor rights agreements; two board seats held by Westlake Ventures partners."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1009",
+      "client_name": "Westlake Ventures",
+      "aliases": ["Westlake Venture Partners"],
+      "industry": "Venture Capital",
+      "matters": [
+        {
+          "matter_id": "M-2023-017-INV",
+          "matter_name": "Investment in BrightPath EdTech Series C",
+          "matter_type": "Corporate Finance",
+          "role": "Represented Investor (Westlake Ventures)",
+          "adverse_parties": [],
+          "related_entities": ["BrightPath EdTech Inc."],
+          "status": "Closed",
+          "date_opened": "2023-01-20",
+          "date_closed": "2023-04-15",
+          "lead_attorney": "Marcus Lee",
+          "confidentiality_level": "Standard",
+          "sensitive_notes": "Same lead attorney represented both the company and a lead investor in the same financing round - dual-representation conflict on file, waiver obtained 2023-01-18."
+        }
+      ]
+    },
+    {
+      "client_id": "CL-1010",
+      "client_name": "Ironclad Defense Systems",
+      "aliases": ["Ironclad Defense", "IDS Corp"],
+      "industry": "Aerospace & Defense",
+      "matters": [
+        {
+          "matter_id": "M-2017-009",
+          "matter_name": "Government Contract Bid Protest",
+          "matter_type": "Litigation",
+          "role": "Represented Petitioner (Ironclad Defense)",
+          "adverse_parties": ["U.S. Department of Defense (contracting agency)", "Falcon Aerospace (competing bidder)"],
+          "related_entities": [],
+          "status": "Closed",
+          "date_opened": "2017-09-01",
+          "date_closed": "2018-02-14",
+          "lead_attorney": "Elena Vasquez",
+          "confidentiality_level": "Standard",
+          "sensitive_notes": "Firm argued that incumbent-bidder advantage was improper; this legal position could conflict with a future client seeking the opposite argument."
+        }
+      ]
+    }
+  ]
+}
